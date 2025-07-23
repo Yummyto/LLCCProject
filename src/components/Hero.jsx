@@ -7,6 +7,8 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Navbar from './Navbar.jsx';
 
+console.log("🔁 Hero recompiled at", new Date().toISOString());
+
 const Hero = () => {
     const [currentIndex, setCurrentIndex] = useState(1);
     const [hasClicked, setHasClicked] = useState(false);
