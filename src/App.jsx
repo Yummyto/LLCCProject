@@ -50,6 +50,6 @@ const MainContent = () => {
     );
 };
 
-const App = () => <MainContent />;
+const App = () => <MainContent />; // ✅ NO HashRouter here
 
 export default App;
