@@ -7,12 +7,13 @@ const Navbar = () => {
     const [showNav, setShowNav] = useState(true);
     const [scrollY, setScrollY] = useState(0);
 
+    // ✅ Notice: no leading slashes for route links
     const navLinks = [
-        { label: "COT", href: "/it", color: "bg-yellow-400", external: true },
-        { label: "COED", href: "/coed", color: "bg-blue-400" },
-        { label: "COHTM", href: "/cohtm", color: "bg-orange-400" },
-        { label: "About", href: "#about", color: "bg-gray-400" },
-        { label: "Contact", href: "#contact", color: "bg-gray-400" },
+        { label: "COT", href: "it", color: "bg-yellow-400", isRoute: true },
+        { label: "COED", href: "coed", color: "bg-blue-400", isRoute: true },
+        { label: "COHTM", href: "cohtm", color: "bg-orange-400", isRoute: true },
+        { label: "About", href: "#about", color: "bg-gray-400", isRoute: false },
+        { label: "Contact", href: "#contact", color: "bg-gray-400", isRoute: false },
     ];
 
     useEffect(() => {
@@ -31,12 +32,13 @@ const Navbar = () => {
     return (
         <header
             className={`fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4
-                transform transition-transform duration-500 ease-in-out
-                ${showNav ? "translate-y-0" : "-translate-y-full"}
-                transition-colors duration-300 ${scrolled ? "bg-black text-white shadow-md" : "bg-transparent text-white"}
-            `}
+        transform transition-transform duration-500 ease-in-out
+        ${showNav ? "translate-y-0" : "-translate-y-full"}
+        transition-colors duration-300 ${
+                scrolled ? "bg-black text-white shadow-md" : "bg-transparent text-white"
+            }`}
         >
-            {/* Logo + LLCC Clickable to Home */}
+            {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
                 <img
                     src={`${import.meta.env.BASE_URL}img/llcc-logo.png`}
@@ -51,11 +53,12 @@ const Navbar = () => {
             {/* Desktop Nav */}
             <nav className="hidden md:flex gap-8">
                 {navLinks.map((link) =>
-                    link.external ? (
+                    link.isRoute ? (
                         <Link
                             key={link.label}
-                            to={link.href}
+                            to={`/#/${link.href}`} // ✅ force correct hash path
                             className="relative uppercase font-medium tracking-wide text-white hover:scale-105 transition group"
+                            onClick={() => setMenuOpen(false)}
                         >
                             {link.label}
                             <span
@@ -67,6 +70,7 @@ const Navbar = () => {
                             key={link.label}
                             href={link.href}
                             className="relative uppercase font-medium tracking-wide text-white hover:scale-105 transition group scroll-smooth"
+                            onClick={() => setMenuOpen(false)}
                         >
                             {link.label}
                             <span
@@ -90,10 +94,10 @@ const Navbar = () => {
             {menuOpen && (
                 <div className="absolute top-16 left-0 w-full bg-black text-white flex flex-col items-center py-6 gap-6 md:hidden z-40">
                     {navLinks.map((link) =>
-                        link.external ? (
+                        link.isRoute ? (
                             <Link
                                 key={link.label}
-                                to={link.href}
+                                to={`/#/${link.href}`} // ✅ hash route
                                 onClick={() => setMenuOpen(false)}
                                 className="relative uppercase font-medium tracking-wide text-white hover:scale-105 transition group"
                             >

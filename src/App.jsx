@@ -1,11 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import VerticalSections from "./components/VerticalSections";
 import ScrollLogo from "./components/ScrollLogo";
 import About from "./components/About";
 import Footer from "./components/Footer";
+
 import COTPage from "./components/pages/COTPage.jsx";
 import COEDPage from "./components/pages/COEDPage.jsx";
 import COHTMPage from "./components/pages/COHTMPage.jsx";
@@ -39,19 +41,15 @@ const MainContent = () => {
                         </>
                     }
                 />
-                <Route path="/cot" element={<COTPage />} />
-                <Route path="/it" element={<ITPage />} />
-                <Route path="/coed" element={<COEDPage />} />
-                <Route path="/cohtm" element={<COHTMPage />} />
+                <Route path="cot" element={<COTPage />} />
+                <Route path="it" element={<ITPage />} />
+                <Route path="coed" element={<COEDPage />} />
+                <Route path="cohtm" element={<COHTMPage />} />
             </Routes>
         </main>
     );
 };
 
-const App = () => (
-    <Router basename="/LLCCProject">
-        <MainContent />
-    </Router>
-);
+const App = () => <MainContent />;
 
 export default App;
