@@ -1,5 +1,3 @@
-// src/App.jsx
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Hero from "./components/Hero";
@@ -16,7 +14,6 @@ import ITPage from "./components/pages/ITPage.jsx";
 const MainContent = () => {
     const location = useLocation();
 
-    // ✅ Updated: Also hide layout for /cohtm
     const hideLayout =
         location.pathname === "/cot" ||
         location.pathname === "/coed" ||
@@ -25,7 +22,6 @@ const MainContent = () => {
 
     return (
         <main className="relative min-h-screen w-screen overflow-x-hidden">
-            {/* ✅ Navbar & ScrollLogo hidden when hideLayout is true */}
             {!hideLayout && <ScrollLogo />}
             {!hideLayout && <Navbar />}
 
@@ -53,7 +49,7 @@ const MainContent = () => {
 };
 
 const App = () => (
-    <Router>
+    <Router basename="/LLCCProject">
         <MainContent />
     </Router>
 );
